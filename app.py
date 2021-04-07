@@ -7,14 +7,14 @@ import pandas as pd
 
 # Remover acentuação
 def pt_normalize(txt):
-    return normalize('NFKD', txt).encode('ASCII', 'ignore').decode('ASCII')
+    return normalize("NFKD", txt).encode("ASCII", "ignore").decode("ASCII")
 
 
 nlp = spacy.load("pt_core_news_sm")  # Carrega o spacy
-nouns = pd.read_csv('4variation_nouns.csv').noun.tolist()  # Carrega as palavras "bad list"
+nouns = pd.read_csv("4variation_nouns.csv").noun.tolist()  # Carrega as palavras "bad list"
 
 st.header("Eta lele")  # Titulo da pagina
-txt = st.text_area('Text to analyze')  # Area para o usuário escrever
+txt = st.text_area("Text to analyze")  # Area para o usuário escrever
 corpus = nlp(txt)  # Processamento do spacy
 response = []  # texto de sáida
 
@@ -33,7 +33,5 @@ for index, word in enumerate(corpus):
     # if word.pos_ == "DET" and (after.dep_ in 'nsubj'):
     #     response[index] = f"**{word.text}**"
 
-
-response = ' '.join(response)
+response = " ".join(response)
 st.markdown(response)
-
