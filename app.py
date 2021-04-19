@@ -1,7 +1,12 @@
 from unicodedata import normalize
+import base64
+
 
 import streamlit as st
+import streamlit.components.v1 as components
+
 import spacy
+from spacy import displacy
 import pandas as pd
 
 
@@ -10,7 +15,7 @@ def pt_normalize(txt):
     return normalize("NFKD", txt).encode("ASCII", "ignore").decode("ASCII")
 
 
-nlp = spacy.load("pt_core_news_sm")  # Carrega o spacy
+nlp = spacy.load("pt_core_news_lg")  # Carrega o spacy
 nouns = pd.read_csv("4variation_nouns.csv").noun.tolist()  # Carrega as palavras "bad list"
 
 st.header("Eta lele")  # Titulo da pagina
@@ -35,3 +40,23 @@ for index, word in enumerate(corpus):
 
 response = " ".join(response)
 st.markdown(response)
+
+
+def render_svg(svg):
+    """Renders the given svg string."""
+    b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
+    html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
+    st.write(html, unsafe_allow_html=True)
+
+with st.beta_expander("More details"):
+    st.write("""
+            Aqui a gente consegue debugar nossa inabilidade linguística
+    """)
+    html = displacy.render(corpus, style="dep")  # svg object
+    # Double newlines seem to mess with the rendering
+    html = html.replace("\n\n", "\n")
+    render_svg(html)
+
+# svg = displacy.render(corpus, style="ent")
+# output_path = Path("/sentence.svg")
+# output_path.open("w", encoding="utf-8").write(svg)
