@@ -22,10 +22,12 @@ st.header("Eta lele")  # Titulo da pagina
 txt = st.text_area("Text to analyze")  # Area para o usuário escrever
 corpus = nlp(txt)  # Processamento do spacy
 response = []  # texto de sáida
+transformed_txt = [] #texto transformado
 
 # For para analisar cada palavra e popular o texto de saída
 for index, word in enumerate(corpus):
     response.append(word.text)
+    transformed_txt.append(word.text)
 
     before = corpus[index - 1] if index > 0 else word  # Palavra anterior
     after = corpus[index + 1] if index < len(corpus) - 1 else word  # Palavra seguinte
@@ -33,13 +35,32 @@ for index, word in enumerate(corpus):
     # Se a palavra tá na badlist -> Marca ela
     if pt_normalize(word.text.lower()) in nouns:
         response[index] = f"**{word.text}**"
+    
+    # Se "aquele que" substitua por "quem"
+    # TODO substituir "aqueles que" -> transformar a frase para o singular
+    if word.text.lower() == 'que' and before.text.lower() == 'aquele':
+        response[index] = f"**{word.text}**"
+        response[index-1] = f"**{before.text}**"
+        transformed_txt[index] = f""
+        if before.text[0].isupper():
+            transformed_txt[index - 1] = f"**Quem**"
+        else:
+            transformed_txt[index - 1] = f"**quem**"
 
     # TODO
     # if word.pos_ == "DET" and (after.dep_ in 'nsubj'):
     #     response[index] = f"**{word.text}**"
 
+    
+
 response = " ".join(response)
+transformed_txt = " ".join(transformed_txt)
 st.markdown(response)
+
+st.write('')
+st.write('Sugestão de frase:')
+st.markdown(transformed_txt)
+
 
 
 def render_svg(svg):
