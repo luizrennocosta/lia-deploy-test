@@ -1,83 +1,72 @@
-from unicodedata import normalize
 import base64
 
-
-import streamlit as st
-import streamlit.components.v1 as components
-
-import spacy
-from spacy import displacy
 import pandas as pd
+import spacy
+import streamlit as st
+from spacy import displacy
+
+from rules.BadWordsRule import BadWordsRule
+from rules.MeaninglessDetRule import MeaninglessDetRule
+from rules.ThatWhoRule import ThatWhoRule
+from annotated_text import annotated_text
+
+rules = [BadWordsRule, MeaninglessDetRule, ThatWhoRule]
 
 
-# Remover acentuação
-def pt_normalize(txt):
-    return normalize("NFKD", txt).encode("ASCII", "ignore").decode("ASCII")
+#@st.cache
+def load_spacy():
+    return spacy.load("pt_core_news_lg")
 
 
-nlp = spacy.load("pt_core_news_lg")  # Carrega o spacy
-nouns = pd.read_csv("4variation_nouns.csv").noun.tolist()  # Carrega as palavras "bad list"
+@st.cache
+def load_nouns():
+    return pd.read_csv("4variation_nouns.csv").noun.tolist()
 
-st.header("Eta lele")  # Titulo da pagina
+
+nlp = load_spacy()
+nouns = load_nouns()
+
+st.header("Lia")  # Titulo da pagina
 txt = st.text_area("Text to analyze")  # Area para o usuário escrever
 corpus = nlp(txt)  # Processamento do spacy
-response = []  # texto de sáida
-transformed_txt = [] #texto transformado
+response = []  # texto de saida
+transformed_txt = []  # texto transformado
+
+context = {
+    'badwords': nouns,
+    'response': response,
+    'transformed_txt': transformed_txt
+}
 
 # For para analisar cada palavra e popular o texto de saída
 for index, word in enumerate(corpus):
-    response.append(word.text)
+    response.append(word.text + " ")
     transformed_txt.append(word.text)
 
     before = corpus[index - 1] if index > 0 else word  # Palavra anterior
     after = corpus[index + 1] if index < len(corpus) - 1 else word  # Palavra seguinte
 
-    # Se a palavra tá na badlist -> Marca ela
-    if pt_normalize(word.text.lower()) in nouns:
-        response[index] = f"**{word.text}**"
-    
-    # Se "aquele que" substitua por "quem"
-    # TODO substituir "aqueles que" -> transformar a frase para o singular
-    if word.text.lower() == 'que' and before.text.lower() == 'aquele':
-        response[index] = f"**{word.text}**"
-        response[index-1] = f"**{before.text}**"
-        transformed_txt[index] = f""
-        if before.text[0].isupper():
-            transformed_txt[index - 1] = f"**Quem**"
-        else:
-            transformed_txt[index - 1] = f"**quem**"
+    context['word'] = word
+    context['before'] = before
+    context['after'] = after
+    context['index'] = index
 
-    # TODO
-    # if word.pos_ == "DET" and (after.dep_ in 'nsubj'):
-    #     response[index] = f"**{word.text}**"
+    for rule in rules:
+        if rule().check(context):
+            rule().refactor(context)
 
-    
+annotated_text(*response)
+#st.markdown(" ".join(response))
 
-response = " ".join(response)
-transformed_txt = " ".join(transformed_txt)
-st.markdown(response)
-
-st.write('')
-st.write('Sugestão de frase:')
-st.markdown(transformed_txt)
-
-
-
-def render_svg(svg):
-    """Renders the given svg string."""
-    b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
-    html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
-    st.write(html, unsafe_allow_html=True)
+st.write("")
+st.write("Sugestão de frase:")
+st.markdown(" ".join(transformed_txt))
 
 with st.beta_expander("More details"):
-    st.write("""
-            Aqui a gente consegue debugar nossa inabilidade linguística
-    """)
+    st.write("""Aqui a gente consegue debugar nossa inabilidade linguística""")
     html = displacy.render(corpus, style="dep")  # svg object
     # Double newlines seem to mess with the rendering
     html = html.replace("\n\n", "\n")
-    render_svg(html)
-
-# svg = displacy.render(corpus, style="ent")
-# output_path = Path("/sentence.svg")
-# output_path.open("w", encoding="utf-8").write(svg)
+    b64 = base64.b64encode(html.encode("utf-8")).decode("utf-8")
+    html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
+    st.write(html, unsafe_allow_html=True)
