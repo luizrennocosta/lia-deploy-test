@@ -55,11 +55,11 @@ for index, word in enumerate(corpus):
         if rule().check(context):
             rule().refactor(context)
 
+st.header("Análise Lia")
 annotated_text(*response)
 #st.markdown(" ".join(response))
 
-st.write("")
-st.write("Sugestão de frase:")
+st.header("Sugestão de frase:")
 st.markdown(" ".join(transformed_txt))
 
 with st.beta_expander("More details"):
