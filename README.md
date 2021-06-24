@@ -10,4 +10,5 @@ all_nouns.csv:
 Para rodar o Streamlit, primeiro instale as libs abaixo:
 - streamlit
 - st-annotated-text
+
 Depois no termina vá a pasta raiz do repositório e rode o comando `streamlit run app.py`
