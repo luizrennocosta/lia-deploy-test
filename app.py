@@ -20,7 +20,7 @@ def load_spacy():
 
 @st.cache
 def load_nouns():
-    return pd.read_csv("4variation_nouns.csv").noun.tolist()
+    return pd.read_csv("4plus_variation_nouns.csv").noun.tolist()
 
 
 nlp = load_spacy()
