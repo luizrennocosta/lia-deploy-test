@@ -1,5 +1,7 @@
 from rules.BaseRule import BaseRule
-from functions.relativePronoun_w_indicativeVerb import neutralize_noun
+from functions.who_w_indicativeVerb import who_w_indicativeVerb
+from functions.synonyms_for_gender_nouns import synonyms_for_gender_nouns
+from functions.person_noun import person_noun
 
 
 class BadWordsRule(BaseRule):
@@ -13,7 +15,14 @@ class BadWordsRule(BaseRule):
         response = context["response"]
         transformed_txt = context["transformed_txt"]
         index = context["index"]
+
         # response[index] = f"**{word.text}**"
         response[index] = (word.text + " ", "Flexiona Genero", "#afa")
 
-        transformed_txt[index] = neutralize_noun(context)
+        # refact_txt = synonyms_for_gender_nouns(word.text)
+        # transformed_txt[index] = refact_txt
+        transformed_txt[index] = who_w_indicativeVerb(context)
+        # if refact_txt != word.text:
+        #     transformed_txt[index] = refact_txt
+        # else:
+        #     transformed_txt[index] = relativePronoun_w_indicativeVerb(context)

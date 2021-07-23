@@ -5,7 +5,7 @@ from nltk.stem.snowball import SnowballStemmer
 nltk.download("punkt")
 
 
-def neutralize_noun(context):
+def who_w_indicativeVerb(context):
     def _get_infinitive_verb(word):
         """
         PT: Converte o pronome em verbo no infinitivo
