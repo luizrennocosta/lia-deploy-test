@@ -28,7 +28,8 @@ def synonyms_for_gender_nouns(word):
                     substituto_list.append(sinonimo + "s")
                 else:
                     substituto_list.append(sinonimo)
-    if len(substituto_list) > 0:
-        return substituto_list[0]
+
+        if len(substituto_list) > 0:
+            return substituto_list[0]
     else:
         return palavra
