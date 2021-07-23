@@ -21,4 +21,4 @@ for n in range(1, 51):
         verbos.append(node.get_text())
 
 df = pd.DataFrame(verbos, columns=["verbos_infinito"])
-df.to_csv("infinitiveverbs.csv", index=False)
+df.to_csv("infinitive_verbs.csv", index=False)

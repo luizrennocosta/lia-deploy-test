@@ -16,13 +16,16 @@ class BadWordsRule(BaseRule):
         transformed_txt = context["transformed_txt"]
         index = context["index"]
 
-        # response[index] = f"**{word.text}**"
         response[index] = (word.text + " ", "Flexiona Genero", "#afa")
 
-        # refact_txt = synonyms_for_gender_nouns(word.text)
-        # transformed_txt[index] = refact_txt
-        transformed_txt[index] = who_w_indicativeVerb(context)
-        # if refact_txt != word.text:
-        #     transformed_txt[index] = refact_txt
-        # else:
-        #     transformed_txt[index] = relativePronoun_w_indicativeVerb(context)
+        refact_txt = synonyms_for_gender_nouns(word.text)
+        transformed_txt[index] = refact_txt
+
+        if refact_txt != word.text:
+            transformed_txt[index] = refact_txt
+        else:
+            refact_txt = who_w_indicativeVerb(context)
+            if refact_txt != word.text:
+                transformed_txt[index] = refact_txt
+            else:
+                transformed_txt[index] = person_noun(word.text)
