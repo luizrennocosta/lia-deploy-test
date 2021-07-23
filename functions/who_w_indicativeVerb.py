@@ -11,7 +11,7 @@ def who_w_indicativeVerb(context):
             if new_metric > metric:
                 metric = new_metric
                 predicted_word = candidate
-        if metric >= 0.8:
+        if metric >= 0.75:
             return predicted_word
         else:
             return word

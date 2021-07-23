@@ -14,21 +14,21 @@ import pandas as pd
 df = pd.read_csv("4variation_nouns.csv")
 
 
-def synonyms_for_gender_nouns(palavra):
-    # palavra = normalize("NFKD", word).encode("ASCII", "ignore").decode("ASCII").lower()
+def synonyms_for_gender_nouns(word):
+    palavra = normalize("NFKD", word).encode("ASCII", "ignore").decode("ASCII").lower()
 
     if df.loc[df["noun"] == palavra].shape[0] != 0:
         palavra_suporte = df.loc[df["noun"] == palavra].support
         sinonimos = Search(palavra_suporte.values[0]).synonyms()
 
-        substituto = {}
-        for i in sinonimos:
-            if i.endswith(("ante", "ente", "ista")):
-                substituto = i
-
-            if bool(substituto) == True:
+        substituto_list = []
+        for sinonimo in sinonimos:
+            if sinonimo.endswith(("ante", "ente", "ista")):
                 if palavra[-1] == "s":
-                    substituto = substituto + "s"
-                return substituto
-            else:
-                return palavra
+                    substituto_list.append(sinonimo + "s")
+                else:
+                    substituto_list.append(sinonimo)
+    if len(substituto_list) > 0:
+        return substituto_list[0]
+    else:
+        return palavra
