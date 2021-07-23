@@ -29,8 +29,6 @@ def synonyms_for_gender_nouns(palavra):
             if bool(substituto) == True:
                 if palavra[-1] == "s":
                     substituto = substituto + "s"
-                break
-
-        return substituto
-    else:
-        return palavra
+                return substituto
+            else:
+                return palavra
