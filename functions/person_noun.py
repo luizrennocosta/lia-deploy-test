@@ -5,7 +5,7 @@ import pandas as pd
 df = pd.read_csv("4variation_nouns.csv")
 
 
-def person_noun(palavra):
+def person_noun(word):
     palavra = normalize("NFKD", word).encode("ASCII", "ignore").decode("ASCII").lower()
 
     if df.loc[df["noun"] == palavra].shape[0] != 0:
