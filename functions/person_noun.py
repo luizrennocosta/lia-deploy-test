@@ -17,5 +17,4 @@ def person_noun(word):
             substituto = "pessoa " + palavra_suporte.values[0][:-1] + "a"
 
         return substituto
-    else:
-        return palavra
+    return palavra
