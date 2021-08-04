@@ -18,7 +18,7 @@ def synonyms_for_gender_nouns(word):
         substituto_list = []
         for sinonimo in sinonimos:
             if sinonimo.endswith(("ante", "ente", "ista")):
-                if palavra[-1] == "s":
+                if word[-1] == "s":
                     substituto_list.append(sinonimo + "s")
                 else:
                     substituto_list.append(sinonimo)

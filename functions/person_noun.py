@@ -6,7 +6,7 @@ df = load_nouns()
 
 def person_noun(word):
     if df.loc[df["noun"] == word].shape[0] != 0:
-        word = df.loc[df["noun"] == word].support
+        palavra_suporte = df.loc[df["noun"] == word].support
 
         def add_number_to_lemma(word, plural):
             return word + ("as" if plural else "a") 
@@ -16,7 +16,7 @@ def person_noun(word):
             return word[:-1] if word[-1] in vowels else word
 
         plural = False
-        if palavra[-1] == "s":
+        if word[-1] == "s":
             plural = True
 
         person = "pessoas" if plural else "pessoa"
