@@ -7,13 +7,14 @@ from spacy import displacy
 
 from rules.BadWordsRule import BadWordsRule
 from rules.MeaninglessDetRule import MeaninglessDetRule
+from rules.HeSheRule import HeSheRule
 from rules.ThatWhoRule import ThatWhoRule
 from annotated_text import annotated_text
 
-rules = [BadWordsRule, MeaninglessDetRule, ThatWhoRule]
+rules = [BadWordsRule, HeSheRule, MeaninglessDetRule, ThatWhoRule]
 
 
-#@st.cache
+# @st.cache
 def load_spacy():
     return spacy.load("pt_core_news_lg")
 
@@ -32,11 +33,7 @@ corpus = nlp(txt)  # Processamento do spacy
 response = []  # texto de saida
 transformed_txt = []  # texto transformado
 
-context = {
-    'badwords': nouns,
-    'response': response,
-    'transformed_txt': transformed_txt
-}
+context = {"badwords": nouns, "response": response, "transformed_txt": transformed_txt}
 
 # For para analisar cada palavra e popular o texto de saída
 for index, word in enumerate(corpus):
@@ -46,10 +43,10 @@ for index, word in enumerate(corpus):
     before = corpus[index - 1] if index > 0 else word  # Palavra anterior
     after = corpus[index + 1] if index < len(corpus) - 1 else word  # Palavra seguinte
 
-    context['word'] = word
-    context['before'] = before
-    context['after'] = after
-    context['index'] = index
+    context["word"] = word
+    context["before"] = before
+    context["after"] = after
+    context["index"] = index
 
     for rule in rules:
         if rule().check(context):
@@ -57,7 +54,7 @@ for index, word in enumerate(corpus):
 
 st.header("Análise Lia")
 annotated_text(*response)
-#st.markdown(" ".join(response))
+# st.markdown(" ".join(response))
 
 st.header("Sugestão de frase:")
 st.markdown(" ".join(transformed_txt))
