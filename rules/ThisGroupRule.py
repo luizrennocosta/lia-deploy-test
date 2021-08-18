@@ -1,10 +1,10 @@
 from rules.BaseRule import BaseRule
 
 
-class HeSheRule(BaseRule):
+class ThisGroupRule(BaseRule):
     def check(self, context):
         word = context["word"]
-        return (word.text.lower() == "eles") or (word.text.lower() == "elas")
+        return word.text.lower() == "eles"
 
     def refactor(self, context):
         before = context["before"]

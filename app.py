@@ -7,11 +7,11 @@ from spacy import displacy
 
 from rules.BadWordsRule import BadWordsRule
 from rules.MeaninglessDetRule import MeaninglessDetRule
-from rules.HeSheRule import HeSheRule
+from rules.ThisGroupRule import ThisGroupRule
 from rules.ThatWhoRule import ThatWhoRule
 from annotated_text import annotated_text
 
-rules = [BadWordsRule, HeSheRule, MeaninglessDetRule, ThatWhoRule]
+rules = [BadWordsRule, ThisGroupRule, MeaninglessDetRule, ThatWhoRule]
 
 
 # @st.cache
