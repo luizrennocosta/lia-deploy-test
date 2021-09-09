@@ -1,4 +1,4 @@
-# LIA: Neutral Language Advisor
+# LIA: Linguagem Inclusiva em Português
 
 ## Dados
 all_nouns.csv:
