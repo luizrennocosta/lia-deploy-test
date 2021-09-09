@@ -1,4 +1,4 @@
-# lia_words_dataset
+# LIA: Neutral Language Advisor
 
 ## Dados
 all_nouns.csv:
