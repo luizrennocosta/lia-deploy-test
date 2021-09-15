@@ -27,6 +27,27 @@ def load_nouns():
 nlp = load_spacy()
 nouns = load_nouns()
 
+st.markdown(
+    f"""
+<button
+    style='
+    position:absolut;
+    border: 1px solid #D9562B;
+    box-sizing:border-box;
+    border-radius:12px;
+    background: #FF774A;
+    width:200px;height:50px;
+    right: -25em;
+    position: absolute;
+    top: -4.5em;'>
+        <a href='https://forms.gle/Nxc2crQk5zXk8SJq7' target="_blank" style = "color:white;">
+            Encontrou um erro?
+        </a>
+</button>
+""",
+    unsafe_allow_html=True,
+)
+
 st.header("Lia")  # Titulo da pagina
 txt = st.text_area("Text to analyze")  # Area para o usuário escrever
 corpus = nlp(txt)  # Processamento do spacy

@@ -1,0 +1,29 @@
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Build
+      - name: Install packages
+        run: docker build --tag lia:latest .
+
+      # Foundation
+      - name: Checkout GitHub Action Repo
+        uses: actions/checkout@v2
+        with:
+          repository: loft-br/actions
+          ref: main
+          token: ${{ secrets.GIT_HUB_TOKEN }} # stored in GitHub secrets
+          path: .github/actions/loft
+
+      # Deploy
+      - uses: ./.github/actions/loft/deploy_production_server
+        env:
+          APP_ACCESS_KEY: ${{ secrets.GONAN_AUTH }}
+        with:
+          name: lia
+          image: lia:latest

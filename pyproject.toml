@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "lia"
+version = "1.0.0"
+description = "LIA"
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+streamlit = "0.87.0"
+watchdog = "*"
+pandas = "1.1.5"
+numpy = "1.20.1"
+s3fs = "0.5.2"
+fsspec = "0.8.7"
+matplotlib = "*"
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
