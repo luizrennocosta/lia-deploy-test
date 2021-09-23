@@ -2,7 +2,7 @@ from unicodedata import normalize
 from pysinonimos.sinonimos import Search
 import pandas as pd
 
-df = load_nouns()
+df = pd.read_csv("4variation_nouns.csv"))
 
 def person_noun(word):
     if df.loc[df["noun"] == word].shape[0] != 0:

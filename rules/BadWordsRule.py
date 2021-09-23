@@ -17,8 +17,8 @@ class BadWordsRule(BaseRule):
         index = context["index"]
 
         response[index] = (word.text + " ", "Flexiona Genero", "#afa")
-
-        refact_txt = synonyms_for_gender_nouns(word.text)
+        normalized_word = self.pt_normalize(word.text.lower())
+        refact_txt = synonyms_for_gender_nouns(normalized_word)
         transformed_txt[index] = refact_txt
 
         if refact_txt != word.text:
@@ -28,4 +28,4 @@ class BadWordsRule(BaseRule):
             if refact_txt != word.text:
                 transformed_txt[index] = refact_txt
             else:
-                transformed_txt[index] = person_noun(word.text)
+                transformed_txt[index] = person_noun(normalized_word)

@@ -32,6 +32,7 @@ corpus = nlp(txt)  # Processamento do spacy
 response = []  # texto de saida
 transformed_txt = []  # texto transformado
 
+
 context = {
     'badwords': nouns,
     'response': response,
