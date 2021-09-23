@@ -2,19 +2,30 @@ from unicodedata import normalize
 from pysinonimos.sinonimos import Search
 import pandas as pd
 
-df = pd.read_csv("4variation_nouns.csv")
-
+df = pd.read_csv("4variation_nouns.csv"))
 
 def person_noun(word):
-    palavra = normalize("NFKD", word).encode("ASCII", "ignore").decode("ASCII").lower()
+    if df.loc[df["noun"] == word].shape[0] != 0:
+        palavra_suporte = df.loc[df["noun"] == word].support
 
-    if df.loc[df["noun"] == palavra].shape[0] != 0:
-        palavra_suporte = df.loc[df["noun"] == palavra].support
+        def add_number_to_lemma(word, plural):
+            return word + ("as" if plural else "a") 
 
-        if palavra[-1] == "s":
-            substituto = "pessoas " + palavra_suporte.values[0][:-1] + "as"
-        else:
-            substituto = "pessoa " + palavra_suporte.values[0][:-1] + "a"
+        def get_lemma_from_support(support_word):
+            vowels = ['a', 'e', 'i', 'o', 'u']
+            return word[:-1] if word[-1] in vowels else word
 
-        return substituto
-    return palavra
+        plural = False
+        if word[-1] == "s":
+            plural = True
+
+        person = "pessoas" if plural else "pessoa"
+        support_lemma = get_lemma_from_support(palavra_suporte.values[0])
+        number = add_number_to_lemma(support_lemma, plural=plural)
+  
+        substitute = f"{person} {number}"
+        
+        return substitute
+    else: 
+        return word
+

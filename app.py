@@ -54,7 +54,11 @@ corpus = nlp(txt)  # Processamento do spacy
 response = []  # texto de saida
 transformed_txt = []  # texto transformado
 
-context = {"badwords": nouns, "response": response, "transformed_txt": transformed_txt}
+context = {
+    'badwords': nouns,
+    'response': response,
+    'transformed_txt': transformed_txt
+}
 
 # For para analisar cada palavra e popular o texto de saída
 for index, word in enumerate(corpus):
