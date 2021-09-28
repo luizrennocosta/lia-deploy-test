@@ -1,7 +1,7 @@
 import streamlit as st
 
-from pages import about_us, lia
 from multiapp import FirstPage
+from pages import about_us, lia
 
 app = FirstPage()
 app.add_app("Home", lia.app)
