@@ -15,7 +15,7 @@ rules = [BadWordsRule, ThisGroupRule, MeaninglessDetRule, ThatWhoRule]
 
 
 def app():
-    # @st.cache
+    @st.experimental_memo
     def load_spacy():
         return spacy.load("pt_core_news_lg")
 
@@ -36,9 +36,9 @@ def app():
         border-radius:12px;
         background: #FF774A;
         width:200px;height:50px;
-        right: -25em;
+        left: 100%;
         position: absolute;
-        top: -4.5em;'>
+        top: -70px;'>
             <a href='https://forms.gle/Nxc2crQk5zXk8SJq7' target="_blank" style = "color:white;">
                 Encontrou um erro?
             </a>

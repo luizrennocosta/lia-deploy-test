@@ -31,6 +31,7 @@ RUN pip3 install poetry && \
 COPY . .
 
 RUN poetry install --no-dev --no-interaction
+RUN poetry run spacy download pt_core_news_lg
 
 # copying all files over
 COPY . .
