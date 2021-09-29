@@ -6,7 +6,7 @@ def app():
     st.header("Pequenos hábitos que causam impacto")
     
     sentence = """
-    LIA (Linguagem Inclusiva com Assistência) é uma ferramenta que revisa textos dando dicas de como torná-lo mais inclusivo.
+    LI²A (Linguagem Inclusiva com Inteligência Artificial) é uma ferramenta que revisa textos dando dicas de como torná-lo mais inclusivo.
 
     A linguagem inclusiva e neutra busca a comunicação sem exclusão ou invisibilidade de qualquer grupo, de forma respeitosa e abrangente. 
 
