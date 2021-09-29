@@ -1,27 +1,27 @@
-
 import base64
-import streamlit as st
+
 import pandas as pd
 import spacy
+import streamlit as st
+from annotated_text import annotated_text
 from spacy import displacy
 
 from rules.BadWordsRule import BadWordsRule
 from rules.MeaninglessDetRule import MeaninglessDetRule
-from rules.ThisGroupRule import ThisGroupRule
 from rules.ThatWhoRule import ThatWhoRule
-from annotated_text import annotated_text
+from rules.ThisGroupRule import ThisGroupRule
 
 rules = [BadWordsRule, ThisGroupRule, MeaninglessDetRule, ThatWhoRule]
+
+
 def app():
     # @st.cache
     def load_spacy():
         return spacy.load("pt_core_news_lg")
 
-
     @st.cache
     def load_nouns():
         return pd.read_csv("4plus_variation_nouns.csv").noun.tolist()
-
 
     nlp = load_spacy()
     nouns = load_nouns()
@@ -87,6 +87,3 @@ def app():
         b64 = base64.b64encode(html.encode("utf-8")).decode("utf-8")
         html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
         st.write(html, unsafe_allow_html=True)
-
-
-

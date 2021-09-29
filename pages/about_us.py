@@ -4,7 +4,7 @@ import streamlit as st
 def app():
     st.title("Sobre LIA")
     st.header("Pequenos hábitos que causam impacto")
-    
+
     sentence = """
     LI²A (Linguagem Inclusiva com Inteligência Artificial) é uma ferramenta que revisa textos dando dicas de como torná-lo mais inclusivo.
 

@@ -1,7 +1,7 @@
-from rules.BaseRule import BaseRule
-from functions.who_w_indicativeVerb import who_w_indicativeVerb
-from functions.synonyms_for_gender_nouns import synonyms_for_gender_nouns
 from functions.person_noun import person_noun
+from functions.synonyms_for_gender_nouns import synonyms_for_gender_nouns
+from functions.who_w_indicativeVerb import who_w_indicativeVerb
+from rules.BaseRule import BaseRule
 
 
 class BadWordsRule(BaseRule):

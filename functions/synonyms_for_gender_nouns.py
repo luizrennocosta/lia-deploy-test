@@ -5,10 +5,12 @@
 # Palavras terminadas em -AGEM, -IDADE e -ÇÃO são femininas.
 
 from unicodedata import normalize
-from pysinonimos.sinonimos import Search
+
 import pandas as pd
+from pysinonimos.sinonimos import Search
 
 df = pd.read_csv("4variation_nouns.csv")
+
 
 def synonyms_for_gender_nouns(word):
     palavra_suporte = df.loc[df["noun"] == word].support
