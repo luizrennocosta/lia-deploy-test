@@ -1,4 +1,6 @@
-# LIA: Linguagem Inclusiva em Português
+# LI²A: Linguagem Inclusiva com Inteligência Artificial
+
+Ferramenta de linguagem inclusiva em Português
 
 ## Dados
 all_nouns.csv:
