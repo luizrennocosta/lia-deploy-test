@@ -9,22 +9,25 @@ from unicodedata import normalize
 import pandas as pd
 from pysinonimos.sinonimos import Search
 
-df = pd.read_csv("4variation_nouns.csv")
+df = pd.read_csv("4plus_variation_nouns.csv")
 
 
 def synonyms_for_gender_nouns(word):
     palavra_suporte = df.loc[df["noun"] == word].support
     sinonimos = Search(palavra_suporte.values[0]).synonyms()
+    # se a palavra não tiver sinônimo, o request retorna 404; se tiver, retorna uma lista
+    if isinstance(sinonimos, list):
+        substituto_list = []
+        for sinonimo in sinonimos:
+            if sinonimo.endswith(("ante", "ente", "ista")):
+                if word[-1] == "s":
+                    substituto_list.append(sinonimo + "s")
+                else:
+                    substituto_list.append(sinonimo)
 
-    substituto_list = []
-    for sinonimo in sinonimos:
-        if sinonimo.endswith(("ante", "ente", "ista")):
-            if word[-1] == "s":
-                substituto_list.append(sinonimo + "s")
-            else:
-                substituto_list.append(sinonimo)
-
-    if len(substituto_list) > 0:
-        return substituto_list[0]
+        if len(substituto_list) > 0:
+            return substituto_list[0]
+        else:
+            return word
     else:
         return word
