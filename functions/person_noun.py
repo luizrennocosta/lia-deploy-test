@@ -3,7 +3,7 @@ from unicodedata import normalize
 import pandas as pd
 from pysinonimos.sinonimos import Search
 
-df = pd.read_csv("4variation_nouns.csv")
+df = pd.read_csv("4plus_variation_nouns.csv")
 
 
 def person_noun(word):
