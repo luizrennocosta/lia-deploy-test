@@ -10,8 +10,9 @@ from rules.BadWordsRule import BadWordsRule
 from rules.MeaninglessDetRule import MeaninglessDetRule
 from rules.ThatWhoRule import ThatWhoRule
 from rules.ThisGroupRule import ThisGroupRule
+from rules.AdjectivesRule import AdjectivesRule
 
-rules = [BadWordsRule, ThisGroupRule, MeaninglessDetRule, ThatWhoRule]
+rules = [BadWordsRule, ThisGroupRule, MeaninglessDetRule, ThatWhoRule, AdjectivesRule]
 
 
 def app():
@@ -29,7 +30,7 @@ def app():
     st.markdown(
         f"""
     <button
-        style='
+       style='
         position:absolut;
         border: 1px solid #D9562B;
         box-sizing:border-box;
