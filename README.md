@@ -13,10 +13,16 @@ all_nouns.csv:
 ## Como Executar a Aplicação
 Para rodar a aplicação, primeiro instale o poetry (https://python-poetry.org/docs/).
 No Mac pode ser instalado via Brew:
-    brew install poetry
+`$ brew install poetry`
+
 Em seguida execute:
-    poetry install
-    poetry run streamlit run app.py
+```
+$ poetry install
+$ poetry run streamlit run app.py
+```
+
+Se você preferir utilizar um requirements.txt para instalar dependências, pode executar os seguintes comandos para criar o requirements.txt.
+`$ poetry export -f requirements.txt > requirements.txt`
 
 
 ## Fluxo da Aplicação
