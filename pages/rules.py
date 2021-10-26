@@ -16,7 +16,7 @@ BadWords_rule = """
     "Os montadores chegaram" > "Quem monta chegou"
 
     Se mesmo assim, a palavra analisada permanecer não refatorada, transfere-se a palavra original para uma terceira função: person_noun().
-    Essa função adiciona a palavra "pessoa" no devido número (plural ou singular) seguida da palavra original em concordância com a palavra pessoa.
+    Essa função adiciona a palavra "pessoa" no devido número (plural ou singular) seguida da palavra original em concordância com a palavra "pessoa".
     Uma frase que seria neutralizada usando essa etapa de refatoração, por exemplo, é:
 
     "Os brasileiros estão trabalhando" > "As pessoas brasileiras estão trabalhando"
