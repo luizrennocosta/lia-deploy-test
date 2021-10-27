@@ -10,12 +10,20 @@ all_nouns.csv:
   Subset de all_nouns com palavras que são flexionadas por gênero (4+ variações).
 
 
-## Streamlit
-Para rodar o Streamlit, primeiro instale as libs abaixo:
-- streamlit
-- st-annotated-text
+## Como Executar a Aplicação
+Para rodar a aplicação, primeiro instale o poetry (https://python-poetry.org/docs/).
+No Mac pode ser instalado via Brew:
+`$ brew install poetry`
 
-Depois no terminal vá a pasta raiz do repositório e rode o comando `streamlit run app.py`
+Em seguida execute:
+```
+$ poetry install
+$ poetry run streamlit run app.py
+```
+
+Se você preferir utilizar um requirements.txt para instalar dependências, pode executar os seguintes comandos para criar o requirements.txt.
+`$ poetry export -f requirements.txt > requirements.txt`
+
 
 ## Fluxo da Aplicação
 
