@@ -86,8 +86,8 @@ def app():
         if isinstance(text, tuple):
             if transformed_text == "":
                 transformed_text = "ocultar palavra"
-            sugestions = f"**{text[0]}**: {transformed_text}"
-            st.markdown(sugestions)
+            suggestions = f"**{text[0]}**: {transformed_text}"
+            st.markdown(suggestions)
 
     with st.expander("Mais detalhes"):
         st.write("""Aqui a gente consegue debugar nossa inabilidade linguística""")
