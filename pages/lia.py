@@ -48,12 +48,16 @@ def app():
     )
 
     st.title("LIA")  # Titulo da pagina
-    txt = st.text_area("Escreva seu texto aqui")  # Area para o usuário escrever
+    txt = st.text_area("Escreva seu texto aqui")  # Area para escrever
     corpus = nlp(txt)  # Processamento do spacy
     response = []  # texto de saida
     transformed_txt = []  # texto transformado
 
-    context = {"badwords": nouns, "response": response, "transformed_txt": transformed_txt}
+    context = {
+        "badwords": nouns,
+        "response": response,
+        "transformed_txt": transformed_txt,
+    }
 
     # For para analisar cada palavra e popular o texto de saída
     for index, word in enumerate(corpus):
@@ -61,7 +65,9 @@ def app():
         transformed_txt.append(word.text)
 
         before = corpus[index - 1] if index > 0 else word  # Palavra anterior
-        after = corpus[index + 1] if index < len(corpus) - 1 else word  # Palavra seguinte
+        after = (
+            corpus[index + 1] if index < len(corpus) - 1 else word
+        )  # Palavra seguinte
 
         context["word"] = word
         context["before"] = before
@@ -74,10 +80,14 @@ def app():
 
     st.header("Análise Lia")
     annotated_text(*response)
-    # st.markdown(" ".join(response))
 
-    st.header("Sugestão de frase:")
-    st.markdown(" ".join(transformed_txt))
+    st.header("Sugestão de trocas:")
+    for text, transformed_text in zip(response, transformed_txt):
+        if isinstance(text, tuple):
+            if transformed_text == "":
+                transformed_text = "ocultar palavra"
+            suggestions = f"**{text[0]}**: {transformed_text}"
+            st.markdown(suggestions)
 
     with st.expander("Mais detalhes"):
         st.write("""Aqui a gente consegue debugar nossa inabilidade linguística""")

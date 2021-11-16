@@ -26,7 +26,7 @@ def synonyms_for_gender_nouns(word):
                     substituto_list.append(sinonimo)
 
         if len(substituto_list) > 0:
-            return substituto_list[0]
+            return ", ".join(substituto_list)
         else:
             return word
     else:
