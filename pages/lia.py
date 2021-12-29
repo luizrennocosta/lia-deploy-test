@@ -39,7 +39,7 @@ def app():
         left: 100%;
         position: absolute;
         top: -70px;'>
-            <a href='https://forms.gle/Nxc2crQk5zXk8SJq7' target="_blank" style = "color:white;">
+            <a href='https://forms.gle/YWPMQVQNgmECkVmk9' target="_blank" style = "color:white;">
                 Encontrou um erro?
             </a>
     </button>
