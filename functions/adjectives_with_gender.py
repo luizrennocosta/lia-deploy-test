@@ -26,6 +26,9 @@ def adjectives_with_gender(word):
         response = requests.get(url)
         response_dict = response.json()
         df = pd.json_normalize(response_dict)
-        substituto.append(df.meanings[0][0])        
-    return substituto      
+        substituto.append(df.meanings[0][0])     
+
+    if len(substituto) > 0:
+            return ", ".join(substituto)
+        else: substituto[0]
     
