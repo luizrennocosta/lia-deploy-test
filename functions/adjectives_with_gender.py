@@ -29,6 +29,6 @@ def adjectives_with_gender(word):
         substituto.append(df.meanings[0][0])     
 
     if len(substituto) > 0:
-            return ", ".join(substituto)
-        else: substituto[0]
+        return ", ".join(substituto)
+    else: return substituto[0]
     
