@@ -19,7 +19,7 @@ class AdjectivesRule(BaseRule):
                 )
             ) or 
                     
-            ((word.pos_ == "ADJ") and (word.dep_ in "amod" or word.dep_ in "ROOT" ) and (not(word.endswith(('ante', 'ente', 'ista', 'antes', 'entes','istas', 'e', 'es', 'l', 'ais', 'm', 'ar', 'ares' 'z', 'zes'))))))
+            ((word.pos_ == "ADJ") and (word.dep_ in "amod" or word.dep_ in "ROOT" ) and (not(str(word).endswith(('ante', 'ente', 'ista', 'antes', 'entes','istas', 'e', 'es', 'l', 'ais', 'm', 'ar', 'ares' 'z', 'zes'))))))
         #return ((word.pos_ == "ADJ") and ((after.pos_ in "NOUN" and after.text.lower() in badwords) or (before.pos_ in "NOUN" and before.text.lower() in badwords)))
 
     def refactor(self, context):
