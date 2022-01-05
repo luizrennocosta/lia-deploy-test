@@ -7,7 +7,8 @@ class AdjectivesRule(BaseRule):
         word = context["word"]
         before = context["before"]
         badwords = context["badwords"]
-        return ((word.pos_ == "ADJ") and ((after.pos_ in "NOUN" and after.text.lower() in badwords) or (before.pos_ in "NOUN" and before.text.lower() in badwords)))
+        return (((word.pos_ == "ADJ") and (word.pos_ in "amod" or word.pos_ in "ROOT" ) and ((before.pos_ in "NOUN" and before.text.lower() in badwords) or (after.pos_ in "NOUN" and before.text.lower() in badwords) or before2.pos_ in "NOUN" and before2.text.lower() in badwords)) or ((word.pos_ == "ADJ") and (word.pos_ in "amod" or word.pos_ in "ROOT" ) and (not(word.endswith(('ante', 'ente', 'ista', 'antes', 'entes','istas', 'e', 'es', 'l', 'ais', 'm', 'ar', 'ares' 'z', 'zes'))))))
+        #return ((word.pos_ == "ADJ") and ((after.pos_ in "NOUN" and after.text.lower() in badwords) or (before.pos_ in "NOUN" and before.text.lower() in badwords)))
 
     def refactor(self, context):
         word = context["word"]

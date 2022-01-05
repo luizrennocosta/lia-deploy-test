@@ -64,10 +64,13 @@ def app():
         before = corpus[index - 1] if index > 0 else word  # Palavra anterior
         after = corpus[index + 1] if index < len(corpus) - 1 else word  # Palavra seguinte
 
+        before2 = corpus[index - 2] if index > 0 else word  # Palavra anterior da anterior
+
         context["word"] = word
+        context["index"] = index
         context["before"] = before
         context["after"] = after
-        context["index"] = index
+        context["before2"] = before2
 
         for rule in rules:
             if rule().check(context):
