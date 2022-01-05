@@ -18,7 +18,6 @@ class AdjectivesRule(BaseRule):
                     before2.pos_ in "NOUN" and before2.text.lower() in badwords
                 )
             ) or 
-                    
             ((word.pos_ == "ADJ") and (word.dep_ in "amod" or word.dep_ in "ROOT" ) and (not(str(word).endswith(('ante', 'ente', 'ista', 'antes', 'entes','istas', 'e', 'es', 'l', 'ais', 'm', 'ar', 'ares' 'z', 'zes'))))))
         #return ((word.pos_ == "ADJ") and ((after.pos_ in "NOUN" and after.text.lower() in badwords) or (before.pos_ in "NOUN" and before.text.lower() in badwords)))
 
