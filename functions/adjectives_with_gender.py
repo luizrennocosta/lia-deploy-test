@@ -17,17 +17,15 @@ def adjectives_with_gender(word):
             if ratio(word, i) <= 0.4:
                 substituto.append(i) 
 
-        if bool(substituto) == True:
-            break
+        #if bool(substituto) == True:
+            #break
 
     if bool(substituto) == False:
-
         #procura significado
         url = 'https://significado.herokuapp.com/'+word
         response = requests.get(url)
         response_dict = response.json()
         df = pd.json_normalize(response_dict)
         substituto.append(df.meanings[0][0])        
-    
     return substituto[0]       
     
