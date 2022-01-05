@@ -6,6 +6,7 @@ class AdjectivesRule(BaseRule):
         after = context["after"]
         word = context["word"]
         before = context["before"]
+        before2 = context["before2"]
         badwords = context["badwords"]
         return (
             (

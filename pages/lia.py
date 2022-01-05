@@ -1,11 +1,9 @@
 import base64
-
 import pandas as pd
 import spacy
 import streamlit as st
 from annotated_text import annotated_text
 from spacy import displacy
-
 from rules.BadWordsRule import BadWordsRule
 from rules.MeaninglessDetRule import MeaninglessDetRule
 from rules.ThatWhoRule import ThatWhoRule
