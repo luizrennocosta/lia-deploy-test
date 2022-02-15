@@ -1,17 +1,16 @@
 import base64
-
 import pandas as pd
 import spacy
 import streamlit as st
 from annotated_text import annotated_text
 from spacy import displacy
-
 from rules.BadWordsRule import BadWordsRule
 from rules.MeaninglessDetRule import MeaninglessDetRule
 from rules.ThatWhoRule import ThatWhoRule
 from rules.ThisGroupRule import ThisGroupRule
+from rules.AdjectivesRule import AdjectivesRule
 
-rules = [BadWordsRule, ThisGroupRule, MeaninglessDetRule, ThatWhoRule]
+rules = [BadWordsRule, ThisGroupRule, MeaninglessDetRule, ThatWhoRule, AdjectivesRule]
 
 
 def app():
@@ -44,14 +43,14 @@ def app():
         transformed_txt.append(word.text)
 
         before = corpus[index - 1] if index > 0 else word  # Palavra anterior
-        after = (
-            corpus[index + 1] if index < len(corpus) - 1 else word
-        )  # Palavra seguinte
+        after = corpus[index + 1] if index < len(corpus) - 1 else word  # Palavra seguinte
+        before2 = corpus[index - 2] if index > 0 else word  # Palavra anterior da anterior
 
         context["word"] = word
+        context["index"] = index
         context["before"] = before
         context["after"] = after
-        context["index"] = index
+        context["before2"] = before2
 
         for rule in rules:
             if rule().check(context):
