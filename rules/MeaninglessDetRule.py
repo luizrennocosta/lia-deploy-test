@@ -5,7 +5,8 @@ class MeaninglessDetRule(BaseRule):
     def check(self, context):
         after = context["after"]
         word = context["word"]
-        return (word.pos_ == "DET") and (after.pos_ in "NOUN")
+        badwords = context["badwords"]
+        return (word.pos_ == "DET") and (after.pos_ in "NOUN") and (after.text.lower() in badwords)
 
     def refactor(self, context):
         word = context["word"]

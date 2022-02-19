@@ -1,6 +1,7 @@
 from urllib.request import urlopen
-from bs4 import BeautifulSoup
+
 import pandas as pd
+from bs4 import BeautifulSoup
 
 
 def next_page(n):

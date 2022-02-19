@@ -2,6 +2,7 @@
 """
 import streamlit as st
 
+
 class FirstPage:
     """Framework for combining multiple streamlit applications.
     Usage:
@@ -21,6 +22,7 @@ class FirstPage:
         app.add_app("Bar", bar.app)
         app.run()
     """
+
     def __init__(self):
         self.apps = []
 
@@ -33,16 +35,14 @@ class FirstPage:
         title:
             title of the app. Appears in the dropdown in the sidebar.
         """
-        self.apps.append({
-            "title": title,
-            "function": func
-        })
+        self.apps.append({"title": title, "function": func})
 
     def run(self):
         app = st.sidebar.radio(
-        # app = st.sidebar.selectbox(
-            'Navegação',
+            # app = st.sidebar.selectbox(
+            "Navegação",
             self.apps,
-            format_func=lambda app: app['title'])
+            format_func=lambda app: app["title"],
+        )
 
-        app['function']()
+        app["function"]()

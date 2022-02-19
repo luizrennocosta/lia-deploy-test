@@ -1,6 +1,6 @@
 import mlconjug3
-from Levenshtein import ratio
 import pandas as pd
+from Levenshtein import ratio
 
 
 def who_w_indicativeVerb(context):
@@ -37,21 +37,17 @@ def who_w_indicativeVerb(context):
                 verbform = after.morph.get("VerbForm")
 
                 if tense == ["Past"] or tense == ["Imp"] or mood == ["Cnd"]:
-                    conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"][
-                        "Indicativo pretérito imperfeito"
-                    ]["3s"]
+                    conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"]["Indicativo pretérito imperfeito"][
+                        "3s"
+                    ]
                 elif tense == ["Pres"] or verbform == ["Inf"]:
-                    conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"][
-                        "Indicativo presente"
-                    ]["3s"]
+                    conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"]["Indicativo presente"]["3s"]
                 elif tense == ["Fut"]:
                     conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"][
                         "Indicativo Futuro do Presente Simples"
                     ]["3s"]
             else:
-                conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"][
-                    "Indicativo presente"
-                ]["3s"]
+                conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"]["Indicativo presente"]["3s"]
 
             refact_txt = f"**quem {conj_verb}**"
             if before.text[0].isupper():
