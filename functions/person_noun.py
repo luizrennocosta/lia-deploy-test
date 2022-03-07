@@ -29,4 +29,4 @@ def person_noun(word):
 
         return substitute
     else:
-        return word
+        return ""
