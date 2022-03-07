@@ -15,7 +15,7 @@ def person_noun(word):
 
         def get_lemma_from_support(support_word):
             vowels = ["a", "e", "i", "o", "u"]
-            return word[:-1] if word[-1] in vowels else word
+            return support_word[:-1] if support_word[-1] in vowels else support_word
 
         plural = False
         if word[-1] == "s":
