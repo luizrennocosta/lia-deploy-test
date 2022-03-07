@@ -9,7 +9,7 @@ class MeaninglessDetRule(BaseRule):
         return (
             (word.pos_ == "DET")
             and (after.pos_ in "NOUN")
-            and (self.pt_normalize(word.text.lower()) in badwords)
+            and (self.pt_normalize(after.text.lower()) in badwords)
         )
 
     def refactor(self, context):
