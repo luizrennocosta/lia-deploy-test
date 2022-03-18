@@ -21,7 +21,7 @@ class BadWordsRule(BaseRule):
         refact_txt = synonyms_for_gender_nouns(normalized_word)
         transformed_txt[index] = refact_txt
 
-        if refact_txt != word.text:
+        if refact_txt != normalized_word:
             transformed_txt[index] = refact_txt
         else:
             refact_txt = who_w_indicativeVerb(context)
