@@ -3,12 +3,12 @@ from rules.BaseRule import BaseRule
 
 class ThatWhoRule(BaseRule):
     def check(self, context):
-        before = context["before"]
+        after = context["after"]
         word = context["word"]
-        return (word.text.lower() == "que") and (before.text.lower() == "aquele")
+        return (word.text.lower() == "aqueles" or word.text.lower() == "aquele") and (after.text.lower() == "que")
 
     def refactor(self, context):
-        before = context["before"]
+        after = context["after"]
         word = context["word"]
         index = context["index"]
         response = context["response"]
@@ -16,10 +16,10 @@ class ThatWhoRule(BaseRule):
 
         # response[index] = f"**{word.text}**"
         # response[index - 1] = f"**{before.text}**"
-        response[index] = (word.text + " ", "Redivo Hates this too", "#fea")
-        response[index - 1] = (before.text + " ", "Redivo Hates this", "#fea")
-        transformed_txt[index] = f""
+        #response[index - 1] = (before.text + " ", "", "#fea")
+        response[index] = (word.text + " " + after.text + " ", "Não neutro", "#fea")
+        #transformed_txt[index - 1] = f""
 
-        transformed_txt[index - 1] = f"**quem**"
-        if before.text[0].isupper():
-            transformed_txt[index - 1] = f"**Quem**"
+        transformed_txt[index] = f"quem"
+        if word.text[0].isupper():
+            transformed_txt[index] = f"Quem"

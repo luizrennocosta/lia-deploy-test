@@ -13,7 +13,7 @@ class ThisGroupRule(BaseRule):
         response = context["response"]
         transformed_txt = context["transformed_txt"]
 
-        response[index] = (word.text + " ", "Não Neutro", "#faa")
+        response[index] = (word.text + " ", "Não Neutro", "#fea")
         transformed_txt[index] = f""
 
         transformed_txt[index - 1] = f"**o grupo**"
