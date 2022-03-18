@@ -13,9 +13,9 @@ class ThisGroupRule(BaseRule):
         response = context["response"]
         transformed_txt = context["transformed_txt"]
 
-        response[index] = (word.text + " ", "Não Neutro", "#faa")
+        response[index] = (word.text + " ", "Não Neutro", "#fea")
         transformed_txt[index] = f""
 
-        transformed_txt[index - 1] = f"**esse grupo**"
+        transformed_txt[index] = f"esse grupo"
         if before.text[0].isupper():
-            transformed_txt[index - 1] = f"**Esse grupo**"
+            transformed_txt[index] = f"Esse grupo"
