@@ -17,7 +17,7 @@ class AdjectivesRule(BaseRule):
                 elif before.pos_ == 'NOUN':
                     noun_related = before.text
             elif word.dep_ == 'ROOT':
-                noun_related = str([t.text for t in word.children if t.pos_ == 'NOUN'][0]).lower()
+                noun_related = str([t.text for t in word.children if (t.pos_ == 'NOUN' or t.pos_ == 'PRON')][0]).lower()
             else:
                 noun_related = ""
             if noun_related in badwords:
