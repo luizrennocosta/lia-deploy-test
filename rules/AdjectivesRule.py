@@ -12,10 +12,6 @@ class AdjectivesRule(BaseRule):
         before2 = context["before2"]
 
         if word.pos_ == 'ADJ':
-            print(word)
-            print(word.dep_)
-            print(after.pos_)
-            print(before.pos_)
             if word.dep_ == 'amod':
                 if after.pos_ == 'NOUN':
                     noun_related = after.text  
