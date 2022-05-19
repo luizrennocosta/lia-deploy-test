@@ -9,17 +9,25 @@ class AdjectivesRule(BaseRule):
         before = context["before"]
         after = context["after"]
         badwords = context["badwords"]
+        before2 = context["before2"]
 
         if word.pos_ == 'ADJ':
+            print(word)
+            print(word.dep_)
+            print(after.pos_)
+            print(before.pos_)
             if word.dep_ == 'amod':
                 if after.pos_ == 'NOUN':
                     noun_related = after.text  
                 elif before.pos_ == 'NOUN':
                     noun_related = before.text
+                elif before.pos_ == 'ADP' and before2.pos_ == 'NOUN':
+                    noun_related = before2.text
+                else: noun_related = "não identificada" 
             elif word.dep_ == 'ROOT':
                 noun_related = str([t.text for t in word.children if (t.pos_ == 'NOUN' or t.pos_ == 'PRON')][0]).lower()
             else:
-                noun_related = ""
+                noun_related = "não identificada"
             if noun_related in badwords:
                 return word 
 
