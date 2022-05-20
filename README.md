@@ -32,3 +32,14 @@ Se você preferir utilizar um requirements.txt para instalar dependências, pode
 </p>
 
 [Link do arquivo .drawio para editar o fluxo](https://drive.google.com/file/d/16eAe_DxUXD3WKhiTgltBbe9OE9i-_I7K/view?usp=sharing)
+
+## Fontes de dados extras
+Para baixar os verbos no infinitivo basta executar:
+```
+ python functions/scraping_infinitive_verbs.py
+```
+
+A frequência de palavras foram retiradas do [Corpus Brasileiro da PUC-SP](http://corpusbrasileiro.pucsp.br/cb/Acesso.html) e [CETENFolha](https://www.linguateca.pt/cetenfolha/), para calcular a frequência das palabras em ambos corpus basta executar:
+```
+ python functions/creating_frequency_words.py
+```

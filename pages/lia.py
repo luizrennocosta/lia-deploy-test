@@ -66,7 +66,7 @@ def app():
         if isinstance(text, tuple):
             if transformed_text == "":
                 transformed_text = "ocultar palavra"
-            suggestions = f"**{text[0]}**: {transformed_text}"
+            suggestions = f"**{text[0].strip()}**: {transformed_text}"
             st.markdown(suggestions)
 
     st.markdown("##")
