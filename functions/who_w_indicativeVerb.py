@@ -16,7 +16,7 @@ def who_w_indicativeVerb(context):
         else:
             return word
 
-    verbs = pd.read_csv("infinitive_verbs.csv")["verbos_infinito"].tolist()
+    verbs = pd.read_csv("data/infinitive_verbs.csv")["verbos_infinito"].tolist()
     after = context["after"]
     before = context["before"]
     word = context["word"]
@@ -49,9 +49,9 @@ def who_w_indicativeVerb(context):
             else:
                 conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"]["Indicativo presente"]["3s"]
 
-            refact_txt = f"**quem {conj_verb}**"
+            refact_txt = f"quem {conj_verb}"
             if before.text[0].isupper():
-                refact_txt = f"**Quem {conj_verb}**"
+                refact_txt = f"Quem {conj_verb}"
             return refact_txt
         except:
             return word.text
