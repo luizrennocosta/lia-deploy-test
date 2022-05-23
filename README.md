@@ -39,7 +39,7 @@ Para baixar os verbos no infinitivo basta executar:
  python functions/scraping_infinitive_verbs.py
 ```
 
-A frequência de palavras foram retiradas do [Corpus Brasileiro da PUC-SP](http://corpusbrasileiro.pucsp.br/cb/Acesso.html) e [CETENFolha](https://www.linguateca.pt/cetenfolha/), para calcular a frequência das palabras em ambos corpus basta executar:
+A frequência de palavras foram retiradas do [Corpus Brasileiro da PUC-SP](http://corpusbrasileiro.pucsp.br/cb/Acesso.html) e [CETENFolha](https://www.linguateca.pt/cetenfolha/), para calcular a frequência das palavras em ambos corpus basta executar:
 ```
  python functions/creating_frequency_words.py
 ```
