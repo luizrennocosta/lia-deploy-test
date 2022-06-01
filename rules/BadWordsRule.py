@@ -18,14 +18,20 @@ class BadWordsRule(BaseRule):
 
         response[index] = (word.text + " ", "Flexiona Genero", "#fea")
         normalized_word = self.pt_normalize(word.text.lower())
-        refact_txt = synonyms_for_gender_nouns(normalized_word)
-        transformed_txt[index] = refact_txt
+        refact_txt_synonums = synonyms_for_gender_nouns(word, normalized_word)
+        refact_txt_indicativeVerb = who_w_indicativeVerb(context)
+        refact_txt_person = person_noun(normalized_word) 
 
-        if refact_txt != normalized_word:
-            transformed_txt[index] = refact_txt
-        else:
-            refact_txt = who_w_indicativeVerb(context)
-            if refact_txt != word.text:
-                transformed_txt[index] = refact_txt
+        transformed_txt[index] = ''
+        if refact_txt_synonums != word.text:
+            transformed_txt[index] = refact_txt_synonums
+        if refact_txt_indicativeVerb != word.text:
+            if transformed_txt[index] == '':
+                transformed_txt[index] = refact_txt_indicativeVerb
             else:
-                transformed_txt[index] = person_noun(normalized_word)
+                transformed_txt[index] = transformed_txt[index] + ', ' + refact_txt_indicativeVerb
+        if refact_txt_person != " ":
+            if transformed_txt[index] == '':
+                    transformed_txt[index] = refact_txt_person
+            else:
+                transformed_txt[index] = transformed_txt[index] + ', ' + refact_txt_person

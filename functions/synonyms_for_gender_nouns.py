@@ -12,15 +12,15 @@ from pysinonimos.sinonimos import Search
 df = pd.read_csv("4plus_variation_nouns.csv")
 
 
-def synonyms_for_gender_nouns(word):
-    palavra_suporte = df.loc[df["noun"] == word].support
+def synonyms_for_gender_nouns(word, normalized_word):
+    palavra_suporte = df.loc[df["noun"] == normalized_word].support
     sinonimos = Search(palavra_suporte.values[0]).synonyms()
     # se a palavra não tiver sinônimo, o request retorna 404; se tiver, retorna uma lista
     if isinstance(sinonimos, list):
         substituto_list = []
         for sinonimo in sinonimos:
             if sinonimo.endswith(("ante", "ente", "ista")):
-                if word[-1] == "s":
+                if normalized_word[-1] == "s":
                     substituto_list.append(sinonimo + "s")
                 else:
                     substituto_list.append(sinonimo)
@@ -28,7 +28,7 @@ def synonyms_for_gender_nouns(word):
         if len(substituto_list) > 0:
             return ", ".join(substituto_list)
         else:
-            return word
+            return word.text
     else:
-        return word
+        return word.text
 
