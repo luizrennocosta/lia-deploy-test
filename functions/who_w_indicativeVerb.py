@@ -3,7 +3,7 @@ import pandas as pd
 from Levenshtein import ratio
 
 
-def who_w_indicativeVerb(context):
+def who_w_indicativeVerb(context, df_words_freq):
     def _get_infinitive_verb(word, verbs):
         metric = 0
         for candidate in verbs:
@@ -45,8 +45,16 @@ def who_w_indicativeVerb(context):
             else:
                 conj_verb = conjugator.conjugate(verb).conjug_info["Indicativo"]["Indicativo presente"]["3s"]
 
-            refact_txt = f"quem {conj_verb}"
-            return refact_txt
+
+            
+            # verificando se verbo conjugado tem score de frequencia maior ou igual a threshold
+            df_freq_verb = df_words_freq.query(' words == @conj_verb')
+            df_freq_verb = df_freq_verb.query(' percentil >= 0.7')
+            if df_freq_verb.shape[0]>0:
+                refact_txt = f"quem {conj_verb}"
+                return refact_txt
+            else:
+                return word.text
         except:
             return word.text
     elif word.text == verb:

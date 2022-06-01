@@ -1,12 +1,4 @@
-from unicodedata import normalize
-
-import pandas as pd
-from pysinonimos.sinonimos import Search
-
-df = pd.read_csv("4plus_variation_nouns.csv")
-
-
-def person_noun(word):
+def person_noun(df, word):
     if df.loc[df["noun"] == word].shape[0] != 0:
         palavra_suporte = df.loc[df["noun"] == word].support
 

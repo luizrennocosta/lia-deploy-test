@@ -4,17 +4,17 @@
 # Palavras terminadas em -ANTE, -ENTE e -ISTA não variam e podem ser usadas para os dois gêneros.
 # Palavras terminadas em -AGEM, -IDADE e -ÇÃO são femininas.
 
-from unicodedata import normalize
-
-import pandas as pd
 from pysinonimos.sinonimos import Search
 
-df = pd.read_csv("4plus_variation_nouns.csv")
-
-
-def synonyms_for_gender_nouns(word, normalized_word):
+def synonyms_for_gender_nouns(df, df_words_freq, word, normalized_word):
     palavra_suporte = df.loc[df["noun"] == normalized_word].support
     sinonimos = Search(palavra_suporte.values[0]).synonyms()
+
+    # pegando sinonimos com score de frequencia maior ou igual a threshold
+    df_freq_sinonimos = df_words_freq.query(' words in @sinonimos')
+    df_freq_sinonimos = df_freq_sinonimos.query(' percentil >= 0.98')
+    sinonimos = df_freq_sinonimos['words'].tolist()
+    
     # se a palavra não tiver sinônimo, o request retorna 404; se tiver, retorna uma lista
     if isinstance(sinonimos, list):
         substituto_list = []
