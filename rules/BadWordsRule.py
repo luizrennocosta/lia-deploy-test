@@ -16,6 +16,7 @@ class BadWordsRule(BaseRule):
         response = context["response"]
         transformed_txt = context["transformed_txt"]
         index = context["index"]
+        # importando tabelas auxiliares
         df = pd.read_csv("4plus_variation_nouns.csv")
         df_words_freq = pd.read_csv("data/words_frequency.csv")
 
