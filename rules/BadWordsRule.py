@@ -3,6 +3,7 @@ from functions.synonyms_for_gender_nouns import synonyms_for_gender_nouns
 from functions.who_w_indicativeVerb import who_w_indicativeVerb
 from rules.BaseRule import BaseRule
 
+import pandas as pd
 
 class BadWordsRule(BaseRule):
     def check(self, context):
@@ -15,12 +16,15 @@ class BadWordsRule(BaseRule):
         response = context["response"]
         transformed_txt = context["transformed_txt"]
         index = context["index"]
+        # importando tabelas auxiliares
+        df = pd.read_csv("4plus_variation_nouns.csv")
+        df_words_freq = pd.read_csv("data/words_frequency.csv")
 
         response[index] = (word.text + " ", "Flexiona Genero", "#fea")
         normalized_word = self.pt_normalize(word.text.lower())
-        refact_txt_synonums = synonyms_for_gender_nouns(word, normalized_word)
-        refact_txt_indicativeVerb = who_w_indicativeVerb(context)
-        refact_txt_person = person_noun(normalized_word) 
+        refact_txt_synonums = synonyms_for_gender_nouns(df, df_words_freq, word, normalized_word)
+        refact_txt_indicativeVerb = who_w_indicativeVerb(context, df_words_freq)
+        refact_txt_person = person_noun(df, normalized_word) 
 
         transformed_txt[index] = ''
         if refact_txt_synonums != word.text:
