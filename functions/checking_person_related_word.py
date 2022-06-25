@@ -34,10 +34,8 @@ def check_lowest_common_hypernym(row):
 def main():
     bad_words_df = pd.read_csv("4plus_variation_nouns.csv")
     print(bad_words_df)
-    # bad_words_df_teste = bad_words_df.head(20)
-    # bad_words_df_teste['is_human_related'] = bad_words_df_teste.apply(lambda row: check_lowest_common_hypernym(row), axis=1)
+
     bad_words_df['is_human_related'] = bad_words_df.apply(lambda row: check_lowest_common_hypernym(row), axis=1)
-    # print(bad_words_df_teste)
     print(bad_words_df)
 
     human_related_trues = (bad_words_df.is_human_related == True)
