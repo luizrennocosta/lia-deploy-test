@@ -18,13 +18,16 @@ def translate_to_english(word):
     translation = translator.translate(word, src='pt', dest='en').text
     return  translation
 
-def check_lowest_common_hypernym(row):
+def check_lowest_common_hypernym(row, support_bol=True):
     """
     This function uses wordnet synonyms sets to define a certain word and the method lowest_common_hypernyms to find out
     if the word "person" is the most common "ancestor" word between person itself and the bad word checked. 
     Thus, it is possible to check if a bad word is related to human beings.
     """
-    word_to_check = row.support
+    if support_bol == True:
+        word_to_check = row.support
+    else: 
+        word_to_check = row
     try:
         check = wn.synset('person.n.01') in wn.synset(f'{translate_to_english(word_to_check)}.n.01').lowest_common_hypernyms(wn.synset('person.n.01'))
     except:
