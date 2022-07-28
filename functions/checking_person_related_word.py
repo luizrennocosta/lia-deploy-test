@@ -24,7 +24,7 @@ def check_lowest_common_hypernym(row, support_bol=True):
     if the word "person" is the most common "ancestor" word between person itself and the bad word checked. 
     Thus, it is possible to check if a bad word is related to human beings.
     """
-    if support_bol == True:
+    if support_bol:
         word_to_check = row.support
     else: 
         word_to_check = row
