@@ -1,5 +1,5 @@
 from rules.BaseRule import BaseRule
-from functions.checking_person_related_word import translate_to_english, check_lowest_common_hypernym
+from functions.checking_person_related_word import check_lowest_common_hypernym
 
 class MeaninglessDetRule(BaseRule):
     def check(self, context):
