@@ -3,20 +3,7 @@ import nltk
 nltk.download('wordnet')
 nltk.download('omw-1.4')
 from nltk.corpus import wordnet as wn
-from googletrans import Translator
-import time
-
-def translate_to_english(word):
-    """
-    This function uses googletrans, a Python lib based on the official Goggle Translate API.
-    googletrans is not recommended for projects which need stability of service translation.
-    The time.sleep is a trick to avoid the too many requests (429) error. It greatly increases execution time, but as this function is supposed to be rarely used, that is not a problem right now.
-    The function receives a word in Portuguese and translates to English.
-    """   
-    translator = Translator()
-    time.sleep(2)
-    translation = translator.translate(word, src='pt', dest='en').text
-    return  translation
+from translate_pt_to_en import translate_pt_to_en
 
 def check_lowest_common_hypernym(row, support_bol=True):
     """
@@ -29,7 +16,7 @@ def check_lowest_common_hypernym(row, support_bol=True):
     else: 
         word_to_check = row
     try:
-        check = wn.synset('person.n.01') in wn.synset(f'{translate_to_english(word_to_check)}.n.01').lowest_common_hypernyms(wn.synset('person.n.01'))
+        check = wn.synset('person.n.01') in wn.synset(f'{translate_pt_to_en(word_to_check)}.n.01').lowest_common_hypernyms(wn.synset('person.n.01'))
     except:
         check = 'Lemma não encontrado'
     return check
