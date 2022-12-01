@@ -14,8 +14,8 @@ spacy = "^3.4.1"
 nltk = "^3.7"
 googletrans = "^3.0.0"
 Levenshtein = "^0.20.2"
-pysinonimos = "^0.1.1"
 mlconjug3 = "^3.8.3"
+scrapy = "^2.7.1"
 
 [tool.poetry.dev-dependencies]
 
